@@ -173,3 +173,53 @@ fn flip_all_bits_expect() {
 
     assert_eq!(expected, bytes);
 }
+
+#[test]
+fn count_return_expected() {
+    let bytes = 0b00101010_00000001_11111111_11111111;
+    let expected: (u8, u8) = (12, 20);
+
+    let result = count(&bytes);
+
+    assert_eq!(expected, result);
+}
+
+#[test]
+fn count_return_expected_1() {
+    let bytes = 0b11111111_11111111_11111111_11111111;
+    let expected: (u8, u8) = (0, 32);
+
+    let result = count(&bytes);
+
+    assert_eq!(expected, result);
+}
+
+#[test]
+fn count_return_expected_0() {
+    let bytes = 0b00000000_00000000_00000000_00000000;
+    let expected: (u8, u8) = (32, 0);
+
+    let result = count(&bytes);
+
+    assert_eq!(expected, result);
+}
+
+#[test]
+fn rotate_right_return_expected() {
+    let mut bytes: u32 = 0b00010100_00011100_11100111_00000000;
+    let expected = 0b00000000_01010000_01110011_10011100;
+
+    rotate_right(&mut bytes, 6);
+
+    assert_eq!(expected, bytes);
+}
+
+#[test]
+fn rotate_left_return_expected() {
+    let mut bytes: u32 = 0b00010100_00011100_11100111_00000000;
+    let expected = 0b00000111_00111001_11000000_00000101;
+
+    rotate_left(&mut bytes, 6);
+
+    assert_eq!(expected, bytes);
+}

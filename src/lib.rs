@@ -84,5 +84,29 @@ pub fn flip_all_bits(bytes: &mut u32) {
     }
 }
 
+pub fn count(bytes: &u32) -> (u8, u8) {
+    let mut result = (0, 0);
+    for n in 0..32 {
+        if *bytes & (1 << n) != 0 {
+            result.1 += 1;
+        } else {
+            result.0 += 1;
+        }
+    }
+    result
+}
+
+pub fn rotate_right(bytes: &mut u32, n: u8) {
+    let n = n % 32;
+
+    *bytes = (*bytes >> n) | (*bytes << (32 - n));
+}
+
+pub fn rotate_left(bytes: &mut u32, n: u8) {
+    let n = n % 32;
+
+    *bytes = (*bytes << n) | (*bytes >> (32 - n));
+}
+
 #[cfg(test)]
 mod tests;
